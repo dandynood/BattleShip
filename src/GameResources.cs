@@ -1,11 +1,6 @@
-
-using Microsoft.VisualBasic;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Data;
-using System.Diagnostics;
+﻿using System;
 using SwinGameSDK;
+using System.Collections.Generic;
 
 public static class GameResources
 {
@@ -34,7 +29,8 @@ public static class GameResources
 
 		//Ships
 		int i = 0;
-		for (i = 1; i <= 5; i++) {
+for (i = 1; i <= 5; i++)
+{
 			NewImage("ShipLR" + i, "ship_deploy_horiz_" + i + ".png");
 			NewImage("ShipUD" + i, "ship_deploy_vert_" + i + ".png");
 		}
@@ -69,7 +65,7 @@ public static class GameResources
 
 	public static Font GameFont(string font)
 	{
-		return _Fonts(font);
+		return _Fonts[font];
 	}
 
 	/// <summary>
@@ -80,7 +76,7 @@ public static class GameResources
 
 	public static Bitmap GameImage(string image)
 	{
-		return _Images(image);
+		return _Images[image];
 	}
 
 	/// <summary>
@@ -91,7 +87,7 @@ public static class GameResources
 
 	public static SoundEffect GameSound(string sound)
 	{
-		return _Sounds(sound);
+		return _Sounds[sound];
 	}
 
 	/// <summary>
@@ -102,21 +98,21 @@ public static class GameResources
 
 	public static Music GameMusic(string music)
 	{
-		return _Music(music);
+		return _Music[music];
 	}
 
 	private static Dictionary<string, Bitmap> _Images = new Dictionary<string, Bitmap>();
 	private static Dictionary<string, Font> _Fonts = new Dictionary<string, Font>();
 	private static Dictionary<string, SoundEffect> _Sounds = new Dictionary<string, SoundEffect>();
-
 	private static Dictionary<string, Music> _Music = new Dictionary<string, Music>();
+
 	private static Bitmap _Background;
 	private static Bitmap _Animation;
 	private static Bitmap _LoaderFull;
 	private static Bitmap _LoaderEmpty;
 	private static Font _LoadingFont;
-
 	private static SoundEffect _StartSound;
+
 	/// <summary>
 	/// The Resources Class stores all of the Games Media Resources, such as Images, Fonts
 	/// Sounds, Music.
@@ -186,7 +182,8 @@ public static class GameResources
 		SwinGame.Delay(200);
 
 		int i = 0;
-		for (i = 0; i <= ANI_CELL_COUNT - 1; i++) {
+		for (i = 0; i < ANI_CELL_COUNT; i++)
+		{
 			SwinGame.DrawBitmap(_Background, 0, 0);
 			SwinGame.DrawBitmapPart(_Animation, (i / ANI_V_CELL_COUNT) * ANI_W, (i % ANI_V_CELL_COUNT) * ANI_H, ANI_W, ANI_H, ANI_X, ANI_Y);
 			SwinGame.Delay(20);
@@ -208,9 +205,8 @@ public static class GameResources
 		const int BG_X = 279;
 		const int BG_Y = 453;
 
-		int fullW = 0;
+		int fullW = 260 * number / STEPS;
 
-		fullW = 260 * number / STEPS;
 		SwinGame.DrawBitmap(_LoaderEmpty, BG_X, BG_Y);
 		SwinGame.DrawBitmapPart(_LoaderFull, 0, 0, fullW, 66, BG_X, BG_Y);
 
@@ -267,32 +263,40 @@ public static class GameResources
 
 	private static void FreeFonts()
 	{
-		Font obj = default(Font);
-		foreach ( obj in _Fonts.Values) {
+//INSTANT C# NOTE: Commented this declaration since looping variables in 'foreach' loops are declared in the 'foreach' header in C#:
+//		Font obj = null;
+		foreach (Font obj in _Fonts.Values)
+		{
 			SwinGame.FreeFont(obj);
 		}
 	}
 
 	private static void FreeImages()
 	{
-		Bitmap obj = default(Bitmap);
-		foreach ( obj in _Images.Values) {
+//INSTANT C# NOTE: Commented this declaration since looping variables in 'foreach' loops are declared in the 'foreach' header in C#:
+//		Bitmap obj = null;
+		foreach (Bitmap obj in _Images.Values)
+		{
 			SwinGame.FreeBitmap(obj);
 		}
 	}
 
 	private static void FreeSounds()
 	{
-		SoundEffect obj = default(SoundEffect);
-		foreach ( obj in _Sounds.Values) {
+//INSTANT C# NOTE: Commented this declaration since looping variables in 'foreach' loops are declared in the 'foreach' header in C#:
+//		SoundEffect obj = null;
+		foreach (SoundEffect obj in _Sounds.Values)
+		{
 			Audio.FreeSoundEffect(obj);
 		}
 	}
 
 	private static void FreeMusic()
 	{
-		Music obj = default(Music);
-		foreach ( obj in _Music.Values) {
+//INSTANT C# NOTE: Commented this declaration since looping variables in 'foreach' loops are declared in the 'foreach' header in C#:
+//		Music obj = null;
+		foreach (Music obj in _Music.Values)
+		{
 			Audio.FreeMusic(obj);
 		}
 	}
@@ -306,10 +310,3 @@ public static class GameResources
 		SwinGame.ProcessEvents();
 	}
 }
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================
