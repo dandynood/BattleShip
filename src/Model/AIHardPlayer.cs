@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Collections.Generic;
 /// <summary>
 /// AIHardPlayer is a type of player. This AI will know directions of ships
 /// when it has found 2 ship tiles and will try to destroy that ship. If that ship

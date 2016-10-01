@@ -1,5 +1,6 @@
 ﻿using System;
 using SwinGameSDK;
+using System.Collections.Generic;
 /// <summary>
 /// This includes a number of utility methods for
 /// drawing and interacting with the Mouse.
@@ -262,7 +263,7 @@ internal static class UtilityFunctions
 	public static void DrawBackground()
 	{
 
-		switch (GameController.GameController.CurrentState())
+		switch (GameController.CurrentState())
 		{
 			case GameState.ViewingMainMenu:
 			case GameState.ViewingGameMenu:
@@ -320,7 +321,7 @@ internal static class UtilityFunctions
 		foreach (Sprite s in _Animations)
 		{
 			SwinGame.UpdateSprite(s);
-			if (s.animationHasEnded)
+			if (s.AnimationHasEnded)
 			{
 				ended.Add(s);
 			}

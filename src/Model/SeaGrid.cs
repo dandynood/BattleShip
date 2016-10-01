@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Collections.Generic;
 /// <summary>
 /// The SeaGrid is the grid upon which the ships are deployed.
 /// </summary>
