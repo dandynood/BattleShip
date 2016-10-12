@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics;
 using SwinGameSDK;
 
 /// <summary>
@@ -46,11 +49,11 @@ internal static class DeploymentController
 			GameController.AddNewState(GameState.ViewingGameMenu);
 		}
 
-		if ((SwinGame.KeyTyped(KeyCode.vk_UP) | SwinGame.KeyTyped(KeyCode.vk_DOWN)) != false)
+		if ((SwinGame.KeyTyped(KeyCode.vk_UP) | SwinGame.KeyTyped(KeyCode.vk_DOWN)))
 		{
 			_currentDirection = Direction.UpDown;
 		}
-		if ((SwinGame.KeyTyped(KeyCode.vk_LEFT) | SwinGame.KeyTyped(KeyCode.vk_RIGHT)) != false)
+		if ((SwinGame.KeyTyped(KeyCode.vk_LEFT) | SwinGame.KeyTyped(KeyCode.vk_RIGHT)))
 		{
 			_currentDirection = Direction.LeftRight;
 		}
@@ -72,22 +75,19 @@ internal static class DeploymentController
 				DoDeployClick();
 			}
 
-			if ((GameController.HumanPlayer.ReadyToDeploy & UtilityFunctions.IsMouseInRectangle(PLAY_BUTTON_LEFT, TOP_BUTTONS_TOP, PLAY_BUTTON_WIDTH, TOP_BUTTONS_HEIGHT)) != false)
-			{
-				GameController.EndDeployment();
-			}
-			else if (UtilityFunctions.IsMouseInRectangle(UP_DOWN_BUTTON_LEFT, TOP_BUTTONS_TOP, DIR_BUTTONS_WIDTH, TOP_BUTTONS_HEIGHT))
-			{
+			if ((GameController.HumanPlayer.ReadyToDeploy & UtilityFunctions.IsMouseInRectangle (PLAY_BUTTON_LEFT, TOP_BUTTONS_TOP, PLAY_BUTTON_WIDTH, TOP_BUTTONS_HEIGHT))) {
+				GameController.EndDeployment ();
+			} else if (UtilityFunctions.IsMouseInRectangle (UP_DOWN_BUTTON_LEFT, TOP_BUTTONS_TOP, DIR_BUTTONS_WIDTH, TOP_BUTTONS_HEIGHT)) {
 				_currentDirection = Direction.LeftRight;
-			}
-			else if (UtilityFunctions.IsMouseInRectangle(LEFT_RIGHT_BUTTON_LEFT, TOP_BUTTONS_TOP, DIR_BUTTONS_WIDTH, TOP_BUTTONS_HEIGHT))
-			{
+			} else if (UtilityFunctions.IsMouseInRectangle (LEFT_RIGHT_BUTTON_LEFT, TOP_BUTTONS_TOP, DIR_BUTTONS_WIDTH, TOP_BUTTONS_HEIGHT)) {
 				_currentDirection = Direction.LeftRight;
-			}
-			else if (UtilityFunctions.IsMouseInRectangle(RANDOM_BUTTON_LEFT, TOP_BUTTONS_TOP, RANDOM_BUTTON_WIDTH, TOP_BUTTONS_HEIGHT))
+			} else if (UtilityFunctions.IsMouseInRectangle (RANDOM_BUTTON_LEFT, TOP_BUTTONS_TOP, RANDOM_BUTTON_WIDTH, TOP_BUTTONS_HEIGHT)) {
+				GameController.HumanPlayer.RandomizeDeployment ();
+			} else if (UtilityFunctions.IsMouseInRectangle (710, 0, 80, 46)) 
 			{
-				GameController.HumanPlayer.RandomizeDeployment();
+				GameController.EndCurrentState ();
 			}
+
 		}
 	}
 

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 /// <summary>
 /// AIHardPlayer is a type of player. This AI will know directions of ships
 /// when it has found 2 ship tiles and will try to destroy that ship. If that ship
@@ -123,18 +125,18 @@ public class AIHardPlayer : AIPlayer
 			//method will be used.
 			switch (_CurrentState)
 			{
-				case AIStates.Searching:
-					SearchCoords(ref row, ref column);
-					break;
-				case AIStates.TargetingShip:
-				case AIStates.HittingShip:
-					TargetCoords(ref row, ref column);
-					break;
-				default:
-					throw new ApplicationException("AI has gone in an invalid state");
+			case AIStates.Searching:
+				SearchCoords(ref row, ref column);
+				break;
+			case AIStates.TargetingShip:
+			case AIStates.HittingShip:
+				TargetCoords(ref row, ref column);
+				break;
+			default:
+				throw new ApplicationException("AI has gone in an invalid state");
 			}
 
-		} while (row < 0 || column < 0 || row >= EnemyGrid.Height || column >= EnemyGrid.Width || EnemyGrid.get_Item(row, column) != TileView.Sea); //while inside the grid and not a sea tile do the search
+		} while (row < 0 || column < 0 || row >= EnemyGrid.Height || column >= EnemyGrid.Width || EnemyGrid[row, column] != TileView.Sea); //while inside the grid and not a sea tile do the search
 	}
 
 	/// <summary>
@@ -175,17 +177,17 @@ public class AIHardPlayer : AIPlayer
 	{
 		switch (result.Value)
 		{
-			case ResultOfAttack.Miss:
-				_CurrentTarget = null;
-				break;
-			case ResultOfAttack.Hit:
-				ProcessHit(row, col);
-				break;
-			case ResultOfAttack.Destroyed:
-				ProcessDestroy(row, col, result.Ship);
-				break;
-			case ResultOfAttack.ShotAlready:
-				throw new ApplicationException("Error in AI");
+		case ResultOfAttack.Miss:
+			_CurrentTarget = null;
+			break;
+		case ResultOfAttack.Hit:
+			ProcessHit(row, col);
+			break;
+		case ResultOfAttack.Destroyed:
+			ProcessDestroy(row, col, result.Ship);
+			break;
+		case ResultOfAttack.ShotAlready:
+			throw new ApplicationException("Error in AI");
 		}
 
 		if (_Targets.Count == 0)
@@ -211,7 +213,7 @@ public class AIHardPlayer : AIPlayer
 
 		//i = 1, as we dont have targets from the current hit...
 		int i = 0;
-		for (i = 1; i < ship.Hits; i++)
+		for (i = 1; i < ship.Hits - 1; i++)
 		{
 
 			if (!foundOriginal)
@@ -262,7 +264,7 @@ public class AIHardPlayer : AIPlayer
 		{
 
 			//if the source of the target does not belong to the destroyed ship put them on the newStack
-			if (t.Source != toRemove)
+			if (!object.ReferenceEquals(t.Source,toRemove)/*t.Source != toRemove*/)
 			{
 				newStack.Push(t);
 			}
@@ -382,9 +384,8 @@ public class AIHardPlayer : AIPlayer
 	private void AddTarget(int row, int column)
 	{
 
-		if (row >= 0 && column >= 0 && row < EnemyGrid.Height && column < EnemyGrid.Width && EnemyGrid.get_Item(row, column) == TileView.Sea)
+		if (row >= 0 && column >= 0 && row < EnemyGrid.Height && column < EnemyGrid.Width && EnemyGrid[row, column] == TileView.Sea)
 		{
-
 			_Targets.Push(new Target(new Location(row, column), _CurrentTarget.ShotAt));
 		}
 	}

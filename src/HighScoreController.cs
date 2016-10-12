@@ -1,6 +1,8 @@
 ﻿using System;
-using System.IO;
+using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using SwinGameSDK;
 
 /// <summary>
@@ -45,7 +47,6 @@ internal static class HighScoreController
 
 	private static List<Score> _Scores = new List<Score>();
 
-
 	/// <summary>
 	/// Loads the scores from the highscores text file.
 	/// </summary>
@@ -69,11 +70,11 @@ internal static class HighScoreController
 
 		int i = 0;
 
-//INSTANT C# NOTE: There is no C# equivalent to VB's implicit 'once only' variable initialization within loops, so the following variable declaration has been placed prior to the loop:
+		//INSTANT C# NOTE: There is no C# equivalent to VB's implicit 'once only' variable initialization within loops, so the following variable declaration has been placed prior to the loop:
 		Score s = new Score();
 		for (i = 1; i <= numScores; i++)
 		{
-//			Dim s As Score
+			//			Dim s As Score
 			string line = input.ReadLine();
 
 
@@ -128,9 +129,10 @@ internal static class HighScoreController
 
 		//For all of the scores
 		int i = 0;
-for (i = 0; i < _Scores.Count; i++)
-{
+		for (i = 0; i < _Scores.Count; i++)
+		{
 			Score s = _Scores[i];
+
 
 			//for scores 1 - 9 use 01 - 09
 			if (i < 9)

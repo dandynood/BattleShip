@@ -1,6 +1,8 @@
 ﻿using System;
-using SwinGameSDK;
+using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
+using SwinGameSDK;
 /// <summary>
 /// This includes a number of utility methods for
 /// drawing and interacting with the Mouse.
@@ -129,16 +131,16 @@ internal static class UtilityFunctions
 				bool draw = true;
 
 
-//INSTANT C# NOTE: The following VB 'Select Case' included either a non-ordinal switch expression or non-ordinal, range-type, or non-constant 'Case' expressions and was converted to C# 'if-else' logic:
-//				Select Case grid.Item(row, col)
-//ORIGINAL LINE: Case TileView.Ship
-				if (grid.get_Item(row, col) == TileView.Ship)
+				//INSTANT C# NOTE: The following VB 'Select Case' included either a non-ordinal switch expression or non-ordinal, range-type, or non-constant 'Case' expressions and was converted to C# 'if-else' logic:
+				//				Select Case grid.Item(row, col)
+				//ORIGINAL LINE: Case TileView.Ship
+				if (grid[row, col] == TileView.Ship)
 				{
 					draw = false;
 					//If small Then fillColor = _SMALL_SHIP Else fillColor = _LARGE_SHIP
 				}
-//ORIGINAL LINE: Case TileView.Miss
-				else if (grid.get_Item(row, col) == TileView.Miss)
+				//ORIGINAL LINE: Case TileView.Miss
+				else if (grid[row, col] == TileView.Miss)
 				{
 					if (small)
 					{
@@ -149,8 +151,8 @@ internal static class UtilityFunctions
 						fillColor = LARGE_MISS;
 					}
 				}
-//ORIGINAL LINE: Case TileView.Hit
-				else if (grid.get_Item(row, col) == TileView.Hit)
+				//ORIGINAL LINE: Case TileView.Hit
+				else if (grid[row, col] == TileView.Hit)
 				{
 					if (small)
 					{
@@ -161,8 +163,8 @@ internal static class UtilityFunctions
 						fillColor = LARGE_HIT;
 					}
 				}
-//ORIGINAL LINE: Case TileView.Sea, TileView.Ship
-				else if ((grid.get_Item(row, col) == TileView.Sea) || (grid.get_Item(row, col) == TileView.Ship))
+				//ORIGINAL LINE: Case TileView.Sea, TileView.Ship
+				else if ((grid[row, col] == TileView.Sea) || (grid[row, col] == TileView.Ship))
 				{
 					if (small)
 					{
@@ -265,22 +267,22 @@ internal static class UtilityFunctions
 
 		switch (GameController.CurrentState)
 		{
-			case GameState.ViewingMainMenu:
-			case GameState.ViewingGameMenu:
-			case GameState.AlteringSettings:
-			case GameState.ViewingHighScores:
-				SwinGame.DrawBitmap(GameResources.GameImage("Menu"), 0, 0);
-				break;
-			case GameState.Discovering:
-			case GameState.EndingGame:
-				SwinGame.DrawBitmap(GameResources.GameImage("Discovery"), 0, 0);
-				break;
-			case GameState.Deploying:
-				SwinGame.DrawBitmap(GameResources.GameImage("Deploy"), 0, 0);
-				break;
-			default:
-				SwinGame.ClearScreen();
-				break;
+		case GameState.ViewingMainMenu:
+		case GameState.ViewingGameMenu:
+		case GameState.AlteringSettings:
+		case GameState.ViewingHighScores:
+			SwinGame.DrawBitmap(GameResources.GameImage("Menu"), 0, 0);
+			break;
+		case GameState.Discovering:
+		case GameState.EndingGame:
+			SwinGame.DrawBitmap(GameResources.GameImage("Discovery"), 0, 0);
+			break;
+		case GameState.Deploying:
+			SwinGame.DrawBitmap(GameResources.GameImage("Deploy"), 0, 0);
+			break;
+		default:
+			SwinGame.ClearScreen();
+			break;
 		}
 
 		SwinGame.DrawFramerate(675, 585, GameResources.GameFont("CourierSmall"));
@@ -345,10 +347,10 @@ internal static class UtilityFunctions
 	public static void DrawAnimationSequence()
 	{
 		int i = 0;
-//INSTANT C# NOTE: The ending condition of VB 'For' loops is tested only on entry to the loop. Instant C# has created a temporary variable in order to use the initial value of ANIMATION_CELLS * FRAMES_PER_CELL for every iteration:
-int tempVar = ANIMATION_CELLS * FRAMES_PER_CELL;
-for (i = 1; i <= tempVar; i++)
-{
+		//INSTANT C# NOTE: The ending condition of VB 'For' loops is tested only on entry to the loop. Instant C# has created a temporary variable in order to use the initial value of ANIMATION_CELLS * FRAMES_PER_CELL for every iteration:
+		int tempVar = ANIMATION_CELLS * FRAMES_PER_CELL;
+		for (i = 1; i <= tempVar; i++)
+		{
 			UpdateAnimations();
 			GameController.DrawScreen();
 		}

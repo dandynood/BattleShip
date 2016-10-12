@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics;
 
 /// <summary>
 /// The ISeaGrid defines the read only interface of a Grid. This
@@ -23,9 +26,9 @@ public interface ISeaGrid
 	/// <param name="column">the column to access</param>
 	/// <value>what the player can see at that location</value>
 	/// <returns>what the player can see at that location</returns>
-//INSTANT C# NOTE: C# does not support parameterized properties - the following property has been rewritten as a function:
-//ORIGINAL LINE: ReadOnly Property Item(ByVal row As Integer, ByVal column As Integer) As TileView
-	TileView get_Item(int row, int column);
+	//INSTANT C# NOTE: C# does not support parameterized properties - the following property has been rewritten as a function:
+	//ORIGINAL LINE: ReadOnly Property Item(ByVal row As Integer, ByVal column As Integer) As TileView
+	TileView this[int row, int column]{get;}
 
 	/// <summary>
 	/// Mark the indicated tile as shot.

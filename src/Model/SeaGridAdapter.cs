@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics;
 
 /// <summary>
 /// The SeaGridAdapter allows for the change in a sea grid view. Whenever a ship is
@@ -29,7 +32,7 @@ public class SeaGridAdapter : ISeaGrid
 			Changed(this, e);
 	}
 
-#region ISeaGrid Members
+	#region ISeaGrid Members
 
 	/// <summary>
 	/// Changes the discovery grid. Where there is a ship we will sea water
@@ -37,19 +40,18 @@ public class SeaGridAdapter : ISeaGrid
 	/// <param name="x">tile x coordinate</param>
 	/// <param name="y">tile y coordinate</param>
 	/// <returns>a tile, either what it actually is, or if it was a ship then return a sea tile</returns>
-//INSTANT C# NOTE: C# does not support parameterized properties - the following property has been rewritten as a function:
-//ORIGINAL LINE: Public ReadOnly Property Item(ByVal x As Integer, ByVal y As Integer) As TileView Implements ISeaGrid.Item
-	public TileView get_Item(int x, int y)
+	//INSTANT C# NOTE: C# does not support parameterized properties - the following property has been rewritten as a function:
+	//ORIGINAL LINE: Public ReadOnly Property Item(ByVal x As Integer, ByVal y As Integer) As TileView Implements ISeaGrid.Item
+	public TileView this[int x, int y]
 	{
-		TileView result = _MyGrid.get_Item(x, y);
+		get{
+			TileView result = _MyGrid[x, y];
 
-		if (result == TileView.Ship)
-		{
-			return TileView.Sea;
-		}
-		else
-		{
-			return result;
+			if (result == TileView.Ship) {
+				return TileView.Sea;
+			} else {
+				return result;
+			}
 		}
 	}
 
@@ -90,6 +92,6 @@ public class SeaGridAdapter : ISeaGrid
 	{
 		return _MyGrid.HitTile(row, col);
 	}
-#endregion
+	#endregion
 
 }

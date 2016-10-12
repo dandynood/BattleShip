@@ -1,6 +1,8 @@
 ﻿using System;
-using SwinGameSDK;
+using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
+using SwinGameSDK;
 
 /// <summary>
 /// The GameController is responsible for controlling the game,
@@ -84,19 +86,19 @@ public static class GameController
 		_theGame = new BattleShipsGame();
 
 		//create the players
-//INSTANT C# NOTE: The following VB 'Select Case' included either a non-ordinal switch expression or non-ordinal, range-type, or non-constant 'Case' expressions and was converted to C# 'if-else' logic:
-//		Select Case _aiSetting
-//ORIGINAL LINE: Case AIOption.Medium
+		//INSTANT C# NOTE: The following VB 'Select Case' included either a non-ordinal switch expression or non-ordinal, range-type, or non-constant 'Case' expressions and was converted to C# 'if-else' logic:
+		//		Select Case _aiSetting
+		//ORIGINAL LINE: Case AIOption.Medium
 		if (_aiSetting == AIOption.Medium)
 		{
 			_ai = new AIMediumPlayer(_theGame);
 		}
-//ORIGINAL LINE: Case AIOption.Hard
+		//ORIGINAL LINE: Case AIOption.Hard
 		else if (_aiSetting == AIOption.Hard)
 		{
 			_ai = new AIHardPlayer(_theGame);
 		}
-//ORIGINAL LINE: Case Else
+		//ORIGINAL LINE: Case Else
 		else
 		{
 			_ai = new AIHardPlayer(_theGame);
@@ -179,16 +181,16 @@ public static class GameController
 			UtilityFunctions.Message = "The AI " + result.ToString();
 		}
 
-//INSTANT C# NOTE: The following VB 'Select Case' included either a non-ordinal switch expression or non-ordinal, range-type, or non-constant 'Case' expressions and was converted to C# 'if-else' logic:
-//		Select Case result.Value
-//ORIGINAL LINE: Case ResultOfAttack.Destroyed
+		//INSTANT C# NOTE: The following VB 'Select Case' included either a non-ordinal switch expression or non-ordinal, range-type, or non-constant 'Case' expressions and was converted to C# 'if-else' logic:
+		//		Select Case result.Value
+		//ORIGINAL LINE: Case ResultOfAttack.Destroyed
 		if (result.Value == ResultOfAttack.Destroyed)
 		{
 			PlayHitSequence(result.Row, result.Column, isHuman);
 			Audio.PlaySoundEffect(GameResources.GameSound("Sink"));
 
 		}
-//ORIGINAL LINE: Case ResultOfAttack.GameOver
+		//ORIGINAL LINE: Case ResultOfAttack.GameOver
 		else if (result.Value == ResultOfAttack.GameOver)
 		{
 			PlayHitSequence(result.Row, result.Column, isHuman);
@@ -210,17 +212,17 @@ public static class GameController
 			}
 
 		}
-//ORIGINAL LINE: Case ResultOfAttack.Hit
+		//ORIGINAL LINE: Case ResultOfAttack.Hit
 		else if (result.Value == ResultOfAttack.Hit)
 		{
 			PlayHitSequence(result.Row, result.Column, isHuman);
 		}
-//ORIGINAL LINE: Case ResultOfAttack.Miss
+		//ORIGINAL LINE: Case ResultOfAttack.Miss
 		else if (result.Value == ResultOfAttack.Miss)
 		{
 			PlayMissSequence(result.Row, result.Column, isHuman);
 		}
-//ORIGINAL LINE: Case ResultOfAttack.ShotAlready
+		//ORIGINAL LINE: Case ResultOfAttack.ShotAlready
 		else if (result.Value == ResultOfAttack.ShotAlready)
 		{
 			Audio.PlaySoundEffect(GameResources.GameSound("Error"));
@@ -280,9 +282,9 @@ public static class GameController
 	/// to the AI player.</remarks>
 	private static void CheckAttackResult(AttackResult result)
 	{
-//INSTANT C# NOTE: The following VB 'Select Case' included either a non-ordinal switch expression or non-ordinal, range-type, or non-constant 'Case' expressions and was converted to C# 'if-else' logic:
-//		Select Case result.Value
-//ORIGINAL LINE: Case ResultOfAttack.Miss
+		//INSTANT C# NOTE: The following VB 'Select Case' included either a non-ordinal switch expression or non-ordinal, range-type, or non-constant 'Case' expressions and was converted to C# 'if-else' logic:
+		//		Select Case result.Value
+		//ORIGINAL LINE: Case ResultOfAttack.Miss
 		if (result.Value == ResultOfAttack.Miss)
 		{
 			if (_theGame.Player == ComputerPlayer)
@@ -290,7 +292,7 @@ public static class GameController
 				AIAttack();
 			}
 		}
-//ORIGINAL LINE: Case ResultOfAttack.GameOver
+		//ORIGINAL LINE: Case ResultOfAttack.GameOver
 		else if (result.Value == ResultOfAttack.GameOver)
 		{
 			SwitchState(GameState.EndingGame);
@@ -312,27 +314,27 @@ public static class GameController
 
 		switch (CurrentState)
 		{
-			case GameState.ViewingMainMenu:
-				MenuController.HandleMainMenuInput();
-				break;
-			case GameState.ViewingGameMenu:
-				MenuController.HandleGameMenuInput();
-				break;
-			case GameState.AlteringSettings:
-				MenuController.HandleSetupMenuInput();
-				break;
-			case GameState.Deploying:
-				DeploymentController.HandleDeploymentInput();
-				break;
-			case GameState.Discovering:
-				DiscoveryController.HandleDiscoveryInput();
-				break;
-			case GameState.EndingGame:
-				EndingGameController.HandleEndOfGameInput();
-				break;
-			case GameState.ViewingHighScores:
-				HighScoreController.HandleHighScoreInput();
-				break;
+		case GameState.ViewingMainMenu:
+			MenuController.HandleMainMenuInput();
+			break;
+		case GameState.ViewingGameMenu:
+			MenuController.HandleGameMenuInput();
+			break;
+		case GameState.AlteringSettings:
+			MenuController.HandleSetupMenuInput();
+			break;
+		case GameState.Deploying:
+			DeploymentController.HandleDeploymentInput();
+			break;
+		case GameState.Discovering:
+			DiscoveryController.HandleDiscoveryInput();
+			break;
+		case GameState.EndingGame:
+			EndingGameController.HandleEndOfGameInput();
+			break;
+		case GameState.ViewingHighScores:
+			HighScoreController.HandleHighScoreInput();
+			break;
 		}
 
 		UtilityFunctions.UpdateAnimations();
@@ -350,27 +352,27 @@ public static class GameController
 
 		switch (CurrentState)
 		{
-			case GameState.ViewingMainMenu:
-				MenuController.DrawMainMenu();
-				break;
-			case GameState.ViewingGameMenu:
-				MenuController.DrawGameMenu();
-				break;
-			case GameState.AlteringSettings:
-				MenuController.DrawSettings();
-				break;
-			case GameState.Deploying:
-				DeploymentController.DrawDeployment();
-				break;
-			case GameState.Discovering:
-				DiscoveryController.DrawDiscovery();
-				break;
-			case GameState.EndingGame:
-				EndingGameController.DrawEndOfGame();
-				break;
-			case GameState.ViewingHighScores:
-				HighScoreController.DrawHighScores();
-				break;
+		case GameState.ViewingMainMenu:
+			MenuController.DrawMainMenu();
+			break;
+		case GameState.ViewingGameMenu:
+			MenuController.DrawGameMenu();
+			break;
+		case GameState.AlteringSettings:
+			MenuController.DrawSettings();
+			break;
+		case GameState.Deploying:
+			DeploymentController.DrawDeployment();
+			break;
+		case GameState.Discovering:
+			DiscoveryController.DrawDiscovery();
+			break;
+		case GameState.EndingGame:
+			EndingGameController.DrawEndOfGame();
+			break;
+		case GameState.ViewingHighScores:
+			HighScoreController.DrawHighScores();
+			break;
 		}
 
 		UtilityFunctions.DrawAnimations();

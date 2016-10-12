@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics;
 using SwinGameSDK;
 
 /// <summary>
@@ -65,7 +68,8 @@ internal static class MenuController
 	/// </summary>
 	public static void HandleSetupMenuInput()
 	{
-		bool handled = HandleMenuInput(SETUP_MENU, 1, 1);
+		bool handled = false;
+		handled = HandleMenuInput(SETUP_MENU, 1, 1);
 
 		if (!handled)
 		{
@@ -102,10 +106,10 @@ internal static class MenuController
 		if (SwinGame.MouseClicked(MouseButton.LeftButton))
 		{
 			int i = 0;
-//INSTANT C# NOTE: The ending condition of VB 'For' loops is tested only on entry to the loop. Instant C# has created a temporary variable in order to use the initial value of _menuStructure(menu).Length for every iteration:
-int tempVar = _menuStructure[menu].Length;
-for (i = 0; i < tempVar; i++)
-{
+			//INSTANT C# NOTE: The ending condition of VB 'For' loops is tested only on entry to the loop. Instant C# has created a temporary variable in order to use the initial value of _menuStructure(menu).Length for every iteration:
+			int tempVar = _menuStructure[menu].Length;
+			for (i = 0; i < tempVar - 1; i++)
+			{
 				//IsMouseOver the i'th button of the menu
 				if (IsMouseOverMenu(i, level, xOffset))
 				{
@@ -186,10 +190,10 @@ for (i = 0; i < tempVar; i++)
 		int btnTop = MENU_TOP - (MENU_GAP + BUTTON_HEIGHT) * level;
 
 		int i = 0;
-//INSTANT C# NOTE: The ending condition of VB 'For' loops is tested only on entry to the loop. Instant C# has created a temporary variable in order to use the initial value of _menuStructure(menu).Length for every iteration:
-int tempVar = _menuStructure[menu].Length;
-for (i = 0; i < tempVar; i++)
-{
+		//INSTANT C# NOTE: The ending condition of VB 'For' loops is tested only on entry to the loop. Instant C# has created a temporary variable in order to use the initial value of _menuStructure(menu).Length for every iteration:
+		int tempVar = _menuStructure[menu].Length;
+		for (i = 0; i < tempVar - 1; i++)
+		{
 			int btnLeft = MENU_LEFT + BUTTON_SEP * (i + xOffset);
 			//SwinGame.FillRectangle(Color.White, btnLeft, btnTop, BUTTON_WIDTH, BUTTON_HEIGHT)
 			SwinGame.DrawTextLines(_menuStructure[menu][i], MENU_COLOR, Color.Black, GameResources.GameFont("Menu"), FontAlignment.AlignCenter, btnLeft + TEXT_OFFSET, btnTop + TEXT_OFFSET, BUTTON_WIDTH, BUTTON_HEIGHT);
@@ -235,15 +239,15 @@ for (i = 0; i < tempVar; i++)
 	{
 		switch (menu)
 		{
-			case MAIN_MENU:
-				PerformMainMenuAction(button);
-				break;
-			case SETUP_MENU:
-				PerformSetupMenuAction(button);
-				break;
-			case GAME_MENU:
-				PerformGameMenuAction(button);
-				break;
+		case MAIN_MENU:
+			PerformMainMenuAction(button);
+			break;
+		case SETUP_MENU:
+			PerformSetupMenuAction(button);
+			break;
+		case GAME_MENU:
+			PerformGameMenuAction(button);
+			break;
 		}
 	}
 
@@ -255,18 +259,18 @@ for (i = 0; i < tempVar; i++)
 	{
 		switch (button)
 		{
-			case MAIN_MENU_PLAY_BUTTON:
-				GameController.StartGame();
-				break;
-			case MAIN_MENU_SETUP_BUTTON:
-				GameController.AddNewState(GameState.AlteringSettings);
-				break;
-			case MAIN_MENU_TOP_SCORES_BUTTON:
-				GameController.AddNewState(GameState.ViewingHighScores);
-				break;
-			case MAIN_MENU_QUIT_BUTTON:
-				GameController.EndCurrentState();
-				break;
+		case MAIN_MENU_PLAY_BUTTON:
+			GameController.StartGame();
+			break;
+		case MAIN_MENU_SETUP_BUTTON:
+			GameController.AddNewState(GameState.AlteringSettings);
+			break;
+		case MAIN_MENU_TOP_SCORES_BUTTON:
+			GameController.AddNewState(GameState.ViewingHighScores);
+			break;
+		case MAIN_MENU_QUIT_BUTTON:
+			GameController.EndCurrentState();
+			break;
 		}
 	}
 
@@ -278,15 +282,15 @@ for (i = 0; i < tempVar; i++)
 	{
 		switch (button)
 		{
-			case SETUP_MENU_EASY_BUTTON:
-				GameController.SetDifficulty(AIOption.Hard);
-				break;
-			case SETUP_MENU_MEDIUM_BUTTON:
-				GameController.SetDifficulty(AIOption.Hard);
-				break;
-			case SETUP_MENU_HARD_BUTTON:
-				GameController.SetDifficulty(AIOption.Hard);
-				break;
+		case SETUP_MENU_EASY_BUTTON:
+			GameController.SetDifficulty(AIOption.Hard);
+			break;
+		case SETUP_MENU_MEDIUM_BUTTON:
+			GameController.SetDifficulty(AIOption.Hard);
+			break;
+		case SETUP_MENU_HARD_BUTTON:
+			GameController.SetDifficulty(AIOption.Hard);
+			break;
 		}
 		//Always end state - handles exit button as well
 		GameController.EndCurrentState();
@@ -300,16 +304,16 @@ for (i = 0; i < tempVar; i++)
 	{
 		switch (button)
 		{
-			case GAME_MENU_RETURN_BUTTON:
-				GameController.EndCurrentState();
-				break;
-			case GAME_MENU_SURRENDER_BUTTON:
-				GameController.EndCurrentState(); //end game menu
-				GameController.EndCurrentState(); //end game
-				break;
-			case GAME_MENU_QUIT_BUTTON:
-				GameController.AddNewState(GameState.Quitting);
-				break;
+		case GAME_MENU_RETURN_BUTTON:
+			GameController.EndCurrentState();
+			break;
+		case GAME_MENU_SURRENDER_BUTTON:
+			GameController.EndCurrentState(); //end game menu
+			GameController.EndCurrentState(); //end game
+			break;
+		case GAME_MENU_QUIT_BUTTON:
+			GameController.AddNewState(GameState.Quitting);
+			break;
 		}
 	}
 }

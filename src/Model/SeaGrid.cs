@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 /// <summary>
 /// The SeaGrid is the grid upon which the ships are deployed.
 /// </summary>
@@ -12,7 +14,8 @@ public class SeaGrid : ISeaGrid
 {
 	private const int _WIDTH = 10;
 	private const int _HEIGHT = 10;
-	private Tile[,] _GameTiles = new Tile[_WIDTH, _HEIGHT];
+
+	private Tile[,] _GameTiles;
 	private Dictionary<ShipName, Ship> _Ships;
 	private int _ShipsKilled = 0;
 
@@ -64,11 +67,11 @@ public class SeaGrid : ISeaGrid
 	/// <param name="x">x coordinate of the tile</param>
 	/// <param name="y">y coordiante of the tile</param>
 	/// <returns></returns>
-//INSTANT C# NOTE: C# does not support parameterized properties - the following property has been rewritten as a function:
-//ORIGINAL LINE: Public ReadOnly Property Item(ByVal x As Integer, ByVal y As Integer) As TileView Implements ISeaGrid.Item
-	public TileView get_Item(int x, int y)
+	//INSTANT C# NOTE: C# does not support parameterized properties - the following property has been rewritten as a function:
+	//ORIGINAL LINE: Public ReadOnly Property Item(ByVal x As Integer, ByVal y As Integer) As TileView Implements ISeaGrid.Item
+	public TileView this[int x, int y]
 	{
-		return _GameTiles[x, y].View;
+		get{ return _GameTiles [x, y].View; }
 	}
 
 	/// <summary>
@@ -95,11 +98,12 @@ public class SeaGrid : ISeaGrid
 	/// </summary>
 	public SeaGrid(Dictionary<ShipName, Ship> ships)
 	{
+		_GameTiles = new Tile[Width, Height];
 		//fill array with empty Tiles
 		int i = 0;
-for (i = 0; i < Width; i++)
-{
-			for (int j = 0; j < Height; j++)
+		for (i = 0; i <= Width; i++)
+		{
+			for (int j = 0; j <= Height -1; j++)
 			{
 				_GameTiles[i, j] = new Tile(i, j, null);
 			}
@@ -152,8 +156,8 @@ for (i = 0; i < Width; i++)
 
 			//place ship's tiles in array and into ship object
 			int i = 0;
-for (i = 0; i < size; i++)
-{
+			for (i = 0; i < size; i++)
+			{
 				if (currentRow < 0 || currentRow >= Width || currentCol < 0 || currentCol >= Height)
 				{
 					throw new InvalidOperationException("Ship can't fit on the board");
