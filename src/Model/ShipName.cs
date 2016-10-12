@@ -1,5 +1,7 @@
-﻿using System;
-
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics;
 /// <summary>
 /// The names of all of the ships in the gam
 /// </summary>
@@ -14,3 +16,10 @@ public enum ShipName
 	AircraftCarrier = 5
 }
 
+
+//=======================================================
+//Service provided by Telerik (www.telerik.com)
+//Conversion powered by NRefactory.
+//Twitter: @telerik
+//Facebook: facebook.com/telerik
+//=======================================================

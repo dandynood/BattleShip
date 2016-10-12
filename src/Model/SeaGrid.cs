@@ -12,8 +12,7 @@ public class SeaGrid : ISeaGrid
 {
 	private const int _WIDTH = 10;
 	private const int _HEIGHT = 10;
-
-	private Tile[,] _GameTiles = new Tile[Width, Height];
+	private Tile[,] _GameTiles = new Tile[_WIDTH, _HEIGHT];
 	private Dictionary<ShipName, Ship> _Ships;
 	private int _ShipsKilled = 0;
 
@@ -118,7 +117,7 @@ for (i = 0; i < Width; i++)
 	/// <param name="direction">the direction the ship is going</param>
 	public void MoveShip(int row, int col, ShipName ship, Direction direction)
 	{
-		Ship newShip = _Ships(ship);
+		Ship newShip = _Ships[ship];
 		newShip.Remove();
 		AddShip(row, col, direction, newShip);
 	}

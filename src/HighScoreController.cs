@@ -45,6 +45,7 @@ internal static class HighScoreController
 
 	private static List<Score> _Scores = new List<Score>();
 
+
 	/// <summary>
 	/// Loads the scores from the highscores text file.
 	/// </summary>
@@ -129,8 +130,7 @@ internal static class HighScoreController
 		int i = 0;
 for (i = 0; i < _Scores.Count; i++)
 {
-			Score s = _Scores.Item(i);
-
+			Score s = _Scores[i];
 
 			//for scores 1 - 9 use 01 - 09
 			if (i < 9)
@@ -173,7 +173,7 @@ for (i = 0; i < _Scores.Count; i++)
 		}
 
 		//is it a high score
-		if (value > _Scores.Item(_Scores.Count - 1).Value)
+		if (value > _Scores[_Scores.Count - 1].Value)
 		{
 			Score s = new Score();
 			s.Value = value;

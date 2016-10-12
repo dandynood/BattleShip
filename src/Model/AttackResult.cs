@@ -1,5 +1,7 @@
-﻿using System;
-
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics;
 /// <summary>
 /// AttackResult gives the result after a shot has been made.
 /// </summary>
@@ -9,19 +11,15 @@ public class AttackResult
 	private Ship _Ship;
 	private string _Text;
 	private int _Row;
-	private int _Column;
 
+	private int _Column;
 	/// <summary>
 	/// The result of the attack
 	/// </summary>
 	/// <value>The result of the attack</value>
 	/// <returns>The result of the attack</returns>
-	public ResultOfAttack Value
-	{
-		get
-		{
-			return _Value;
-		}
+	public ResultOfAttack Value {
+		get { return _Value; }
 	}
 
 	/// <summary>
@@ -29,12 +27,8 @@ public class AttackResult
 	/// </summary>
 	/// <value>The ship, if any, involved in this result</value>
 	/// <returns>The ship, if any, involved in this result</returns>
-	public Ship Ship
-	{
-		get
-		{
-			return _Ship;
-		}
+	public Ship Ship {
+		get { return _Ship; }
 	}
 
 	/// <summary>
@@ -43,34 +37,22 @@ public class AttackResult
 	/// <value>A textual description of the result.</value>
 	/// <returns>A textual description of the result.</returns>
 	/// <remarks>A textual description of the result.</remarks>
-	public string Text
-	{
-		get
-		{
-			return _Text;
-		}
+	public string Text {
+		get { return _Text; }
 	}
 
 	/// <summary>
 	/// The row where the attack occurred
 	/// </summary>
-	public int Row
-	{
-		get
-		{
-			return _Row;
-		}
+	public int Row {
+		get { return _Row; }
 	}
 
 	/// <summary>
 	/// The column where the attack occurred
 	/// </summary>
-	public int Column
-	{
-		get
-		{
-			return _Column;
-		}
+	public int Column {
+		get { return _Column; }
 	}
 
 	/// <summary>
@@ -102,11 +84,17 @@ public class AttackResult
 	/// <returns>The textual information about the attack</returns>
 	public override string ToString()
 	{
-		if (_Ship == null)
-		{
+		if (_Ship == null) {
 			return Text;
 		}
 
 		return Text + " " + _Ship.Name;
 	}
 }
+
+//=======================================================
+//Service provided by Telerik (www.telerik.com)
+//Conversion powered by NRefactory.
+//Twitter: @telerik
+//Facebook: facebook.com/telerik
+//=======================================================

@@ -1,5 +1,7 @@
-﻿using System;
-
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics;
 /// <summary>
 /// The direction the ship can be oriented.
 /// </summary>
@@ -15,3 +17,10 @@ public enum Direction
 	/// </summary>
 	UpDown
 }
+
+//=======================================================
+//Service provided by Telerik (www.telerik.com)
+//Conversion powered by NRefactory.
+//Twitter: @telerik
+//Facebook: facebook.com/telerik
+//=======================================================
