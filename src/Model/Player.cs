@@ -1,3 +1,4 @@
+
 using Microsoft.VisualBasic;
 using System;
 using System.Collections;
@@ -42,7 +43,7 @@ public class Player : IEnumerable<Ship>
 	public Player(BattleShipsGame controller)
 	{
 		_game = controller;
-		_playerGrid = new SeaGrid(_Ships);
+    _playerGrid = new SeaGrid(_Ships);
 
 		//for each ship add the ships name so the seagrid knows about them
 		foreach (ShipName name in Enum.GetValues(typeof(ShipName))) {
@@ -77,7 +78,7 @@ public class Player : IEnumerable<Ship>
 	}
 
 	public bool IsDestroyed {
-		//Check if all ships are destroyed... -1 for the none ship
+//Check if all ships are destroyed... -1 for the none ship
 		get { return _playerGrid.ShipsKilled == Enum.GetValues(typeof(ShipName)).Length - 1; }
 	}
 
@@ -183,13 +184,13 @@ public class Player : IEnumerable<Ship>
 		result = EnemyGrid.HitTile(row, col);
 
 		switch (result.Value) {
-		case ResultOfAttack.Destroyed:
-		case ResultOfAttack.Hit:
-			_hits += 1;
-			break;
-		case ResultOfAttack.Miss:
-			_misses += 1;
-			break;
+			case ResultOfAttack.Destroyed:
+			case ResultOfAttack.Hit:
+				_hits += 1;
+				break;
+			case ResultOfAttack.Miss:
+				_misses += 1;
+				break;
 		}
 
 		return result;
@@ -232,3 +233,10 @@ public class Player : IEnumerable<Ship>
 		}
 	}
 }
+
+//=======================================================
+//Service provided by Telerik (www.telerik.com)
+//Conversion powered by NRefactory.
+//Twitter: @telerik
+//Facebook: facebook.com/telerik
+//=======================================================

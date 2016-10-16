@@ -1,4 +1,6 @@
-﻿using System;
+
+using Microsoft.VisualBasic;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -7,7 +9,7 @@ using SwinGameSDK;
 /// <summary>
 /// The battle phase is handled by the DiscoveryController.
 /// </summary>
-internal static class DiscoveryController
+static class DiscoveryController
 {
 
 	/// <summary>
@@ -19,13 +21,11 @@ internal static class DiscoveryController
 	/// </remarks>
 	public static void HandleDiscoveryInput()
 	{
-		if (SwinGame.KeyTyped(KeyCode.vk_ESCAPE))
-		{
+		if (SwinGame.KeyTyped(KeyCode.vk_ESCAPE)) {
 			GameController.AddNewState(GameState.ViewingGameMenu);
 		}
 
-		if (SwinGame.MouseClicked(MouseButton.LeftButton))
-		{
+		if (SwinGame.MouseClicked(MouseButton.LeftButton)) {
 			DoAttack();
 		}
 	}
@@ -35,8 +35,9 @@ internal static class DiscoveryController
 	/// </summary>
 	private static void DoAttack()
 	{
-		Point2D mouse = SwinGame.MousePosition();
+		Point2D mouse = default(Point2D);
 
+		mouse = SwinGame.MousePosition();
 
 		//Calculate the row/col clicked
 		int row = 0;
@@ -44,10 +45,8 @@ internal static class DiscoveryController
 		row = Convert.ToInt32(Math.Floor((mouse.Y - UtilityFunctions.FIELD_TOP) / (UtilityFunctions.CELL_HEIGHT + UtilityFunctions.CELL_GAP)));
 		col = Convert.ToInt32(Math.Floor((mouse.X - UtilityFunctions.FIELD_LEFT) / (UtilityFunctions.CELL_WIDTH + UtilityFunctions.CELL_GAP)));
 
-		if (row >= 0 && row < GameController.HumanPlayer.EnemyGrid.Height)
-		{
-			if (col >= 0 && col < GameController.HumanPlayer.EnemyGrid.Width)
-			{
+		if (row >= 0 & row < GameController.HumanPlayer.EnemyGrid.Height) {
+			if (col >= 0 & col < GameController.HumanPlayer.EnemyGrid.Width) {
 				GameController.Attack(row, col);
 			}
 		}
@@ -63,12 +62,9 @@ internal static class DiscoveryController
 		const int HITS_TOP = 206;
 		const int SPLASH_TOP = 256;
 
-		if (((SwinGame.KeyDown(KeyCode.vk_LSHIFT) | SwinGame.KeyDown(KeyCode.vk_RSHIFT)) & SwinGame.KeyDown(KeyCode.vk_c)))
-		{
+		if ((SwinGame.KeyDown(KeyCode.vk_LSHIFT) | SwinGame.KeyDown(KeyCode.vk_RSHIFT)) & SwinGame.KeyDown(KeyCode.vk_c)) {
 			UtilityFunctions.DrawField(GameController.HumanPlayer.EnemyGrid, GameController.ComputerPlayer, true);
-		}
-		else
-		{
+		} else {
 			UtilityFunctions.DrawField(GameController.HumanPlayer.EnemyGrid, GameController.ComputerPlayer, false);
 		}
 
@@ -81,3 +77,10 @@ internal static class DiscoveryController
 	}
 
 }
+
+//=======================================================
+//Service provided by Telerik (www.telerik.com)
+//Conversion powered by NRefactory.
+//Twitter: @telerik
+//Facebook: facebook.com/telerik
+//=======================================================
