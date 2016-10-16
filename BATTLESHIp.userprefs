@@ -1,13 +1,13 @@
 ﻿<Properties StartupItem="BATTLESHIP.csproj" RefactoringSettings.EnableRefactorings="True">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug-Windows|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="src\Model\Ship.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="src\DeploymentController.cs">
     <Files>
       <File FileName="src\DiscoveryController.cs" Line="1" Column="1" />
       <File FileName="src\EndingGameController.cs" Line="1" Column="1" />
       <File FileName="src\GameLogic.cs" Line="1" Column="1" />
       <File FileName="src\MenuController.cs" Line="1" Column="1" />
       <File FileName="src\GameController.cs" Line="1" Column="1" />
-      <File FileName="src\DeploymentController.cs" Line="1" Column="1" />
+      <File FileName="src\DeploymentController.cs" Line="102" Column="138" />
       <File FileName="src\Model\Player.cs" Line="1" Column="1" />
       <File FileName="src\GameResources.cs" Line="1" Column="1" />
       <File FileName="src\GameState.cs" Line="1" Column="1" />
@@ -19,7 +19,8 @@
       <File FileName="src\Model\ISeaGrid.cs" Line="1" Column="1" />
       <File FileName="src\Model\AIPlayer.cs" Line="1" Column="1" />
       <File FileName="src\Model\AIHardPlayer.cs" Line="1" Column="1" />
-      <File FileName="src\Model\Ship.cs" Line="81" Column="3" />
+      <File FileName="src\Model\Ship.cs" Line="1" Column="1" />
+      <File FileName="..\Desktop\src\DeploymentController.cs" Line="125" Column="35" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
