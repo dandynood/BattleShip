@@ -61,6 +61,8 @@ public static class GameResources
 	private static void LoadMusic()
 	{
 		NewMusic("Background", "horrordrone.mp3");
+		NewMusic ("Rocky", "rockytheme.mp3");
+		NewMusic ("Anklebiter", "Anklebiter.mp3");
 	}
 
 	/// <summary>

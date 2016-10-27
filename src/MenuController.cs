@@ -26,6 +26,7 @@ static class MenuController
 			"PLAY",
 			"SETUP",
 			"SCORES",
+			"MUSIC",
 			"QUIT"
 		},
 		new string[] {
@@ -37,6 +38,11 @@ static class MenuController
 			"EASY",
 			"MEDIUM",
 			"HARD"
+		},
+		new string[] {
+			"ORIGINAL",
+			"ROCKY",
+			"ANKLEBITER"
 		}
 
 	};
@@ -52,14 +58,21 @@ static class MenuController
 	private const int GAME_MENU = 1;
 
 	private const int SETUP_MENU = 2;
+	private const int SETUP_MUSIC = 3;
+
 	private const int MAIN_MENU_PLAY_BUTTON = 0;
 	private const int MAIN_MENU_SETUP_BUTTON = 1;
 	private const int MAIN_MENU_TOP_SCORES_BUTTON = 2;
+	private const int MAIN_MENU_MUSIC_BUTTON = 3;
+	private const int MAIN_MENU_QUIT_BUTTON = 4;
 
-	private const int MAIN_MENU_QUIT_BUTTON = 3;
 	private const int SETUP_MENU_EASY_BUTTON = 0;
 	private const int SETUP_MENU_MEDIUM_BUTTON = 1;
 	private const int SETUP_MENU_HARD_BUTTON = 2;
+
+	private const int SETUP_MUSIC_ORIGINAL_BUTTON = 0;
+	private const int SETUP_MUSIC_ROCKY_BUTTON = 1;
+	private const int SETUP_MUSIC_ANKLEBITER_BUTTON = 2;
 
 	private const int SETUP_MENU_EXIT_BUTTON = 3;
 	private const int GAME_MENU_RETURN_BUTTON = 0;
@@ -89,6 +102,17 @@ static class MenuController
 			HandleMenuInput(MAIN_MENU, 0, 0);
 		}
 	}
+
+	public static void HandleSetupMusicMenuInput()
+	{
+		bool handled = false;
+		handled = HandleMenuInput(SETUP_MUSIC, 1, 1);
+
+		if (!handled) {
+			HandleMenuInput(MAIN_MENU, 0, 0);
+		}
+	}
+
 
 	/// <summary>
 	/// Handle input in the game menu.
@@ -171,6 +195,15 @@ static class MenuController
 		DrawButtons(SETUP_MENU, 1, 1);
 	}
 
+	public static void DrawMusicSettings()
+	{
+		//Clears the Screen to Black
+		//SwinGame.DrawText("Settings", Color.White, GameFont("ArialLarge"), 50, 50)
+
+		DrawButtons(MAIN_MENU);
+		DrawButtons(SETUP_MUSIC, 1, 1);
+	}
+
 	/// <summary>
 	/// Draw the buttons associated with a top level menu.
 	/// </summary>
@@ -248,6 +281,9 @@ static class MenuController
 			case SETUP_MENU:
 				PerformSetupMenuAction(button);
 				break;
+		case SETUP_MUSIC:
+			PerformSetupMusicAction(button);
+			break;
 			case GAME_MENU:
 				PerformGameMenuAction(button);
 				break;
@@ -267,6 +303,9 @@ static class MenuController
 			case MAIN_MENU_SETUP_BUTTON:
 			GameController.AddNewState(GameState.AlteringSettings);
 				break;
+		case MAIN_MENU_MUSIC_BUTTON:
+			GameController.AddNewState(GameState.AlteringMusic);
+			break;
 			case MAIN_MENU_TOP_SCORES_BUTTON:
 			GameController.AddNewState(GameState.ViewingHighScores);
 				break;
@@ -294,6 +333,28 @@ static class MenuController
 			case SETUP_MENU_HARD_BUTTON:
 			GameController.SetDifficulty(AIOption.Hard);
 				break;
+		}
+		//Always end state - handles exit button as well
+		GameController.EndCurrentState();
+	}
+
+	private static void PerformSetupMusicAction(int button)
+	{
+		switch (button) {
+		case SETUP_MENU_EASY_BUTTON:	//fix the dificulty to normal
+			//			GameController.SetDifficulty(AIOption.Hard);
+			SwinGame.StopMusic();
+			SwinGame.PlayMusic(GameResources.GameMusic("Background"));
+			break;
+		case SETUP_MENU_MEDIUM_BUTTON:
+			//			GameController.SetDifficulty(AIOption.Hard);
+			SwinGame.StopMusic();
+			SwinGame.PlayMusic(GameResources.GameMusic("Rocky"));
+			break;
+		case SETUP_MENU_HARD_BUTTON:
+			SwinGame.StopMusic();
+			SwinGame.PlayMusic(GameResources.GameMusic("Anklebiter"));
+			break;
 		}
 		//Always end state - handles exit button as well
 		GameController.EndCurrentState();
