@@ -343,16 +343,16 @@ static class MenuController
 		switch (button) {
 		case SETUP_MENU_EASY_BUTTON:	//fix the dificulty to normal
 			//			GameController.SetDifficulty(AIOption.Hard);
-			SwinGame.StopMusic();
+
 			SwinGame.PlayMusic(GameResources.GameMusic("Background"));
 			break;
 		case SETUP_MENU_MEDIUM_BUTTON:
 			//			GameController.SetDifficulty(AIOption.Hard);
-			SwinGame.StopMusic();
+	
 			SwinGame.PlayMusic(GameResources.GameMusic("Rocky"));
 			break;
 		case SETUP_MENU_HARD_BUTTON:
-			SwinGame.StopMusic();
+
 			SwinGame.PlayMusic(GameResources.GameMusic("Anklebiter"));
 			break;
 		}

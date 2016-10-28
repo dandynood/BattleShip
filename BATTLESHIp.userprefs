@@ -1,11 +1,11 @@
 ﻿<Properties StartupItem="BATTLESHIP.csproj" RefactoringSettings.EnableRefactorings="True">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug-Windows|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="src\EndingGameController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="src\MenuController.cs">
     <Files>
       <File FileName="src\DiscoveryController.cs" Line="1" Column="1" />
-      <File FileName="src\EndingGameController.cs" Line="28" Column="140" />
+      <File FileName="src\EndingGameController.cs" Line="1" Column="1" />
       <File FileName="src\GameLogic.cs" Line="1" Column="1" />
-      <File FileName="src\MenuController.cs" Line="1" Column="1" />
+      <File FileName="src\MenuController.cs" Line="345" Column="53" />
       <File FileName="src\GameController.cs" Line="1" Column="1" />
       <File FileName="src\DeploymentController.cs" Line="1" Column="1" />
       <File FileName="src\Model\Player.cs" Line="1" Column="1" />
