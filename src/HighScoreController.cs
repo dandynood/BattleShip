@@ -199,8 +199,22 @@ static class HighScoreController
 			_Scores.Add(s);
 			_Scores.Sort();
 
+			//save score 
+			SaveScores();
+
 			GameController.EndCurrentState();
 		}
+	}
+
+	public static void DrawInstruction()
+	{
+			SwinGame.DrawText ("Instruction before game play:", Color.White, GameResources.GameFont ("Instruction"), 0, 20);
+			SwinGame.DrawText ("===============================", Color.White, GameResources.GameFont ("Instruction"), 0, 50);
+			SwinGame.DrawText ("1. Choose the difficulty.", Color.White, GameResources.GameFont ("Instruction"), 0, 80);
+			SwinGame.DrawText ("2. Press PLAY button to enter the game.", Color.White, GameResources.GameFont ("Instruction"), 0, 120);
+			SwinGame.DrawText ("3. Relocate ships before game start.", Color.White, GameResources.GameFont ("Instruction"), 0, 160);
+			SwinGame.DrawText ("4. Press START button to begin the game.", Color.White, GameResources.GameFont ("Instruction"), 0, 200);
+			SwinGame.DrawText ("5. Click on the columns until the opponent is defeated.", Color.White, GameResources.GameFont ("Instruction"), 0, 240);
 	}
 }
 
